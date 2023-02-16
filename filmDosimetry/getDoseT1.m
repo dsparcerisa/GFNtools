@@ -17,7 +17,11 @@ function [D, dD] = getDoseT1(CoefR1, CoefG1, CoefB1, dCoefR1, dCoefB1, dCoefG1, 
 % Weighted average
 D = (D_R ./ dD_R.^2 +  D_G ./ dD_G.^2 +  D_B ./ dD_B.^2) ...
     ./ (1 ./ dD_R.^2 +  1 ./ dD_G.^2 +  1 ./ dD_B.^2);
-dD = (1 ./ dD_R.^2 +  1 ./ dD_G.^2 +  1 ./ dD_B.^2).^(-0.5); % TODO: Must correct for chi2!!!
+dD = (1 ./ dD_R.^2 +  1 ./ dD_G.^2 +  1 ./ dD_B.^2).^(-0.5); 
+
+% Correction for over-dispersion
+chi2 = sqrt((((D-D_R)./dD_R).^2 + ((D-D_G)./dD_G).^2 + ((D-D_B)./dD_B).^2)/2);
+dD = chi2 .* dD;
 
 end
 
