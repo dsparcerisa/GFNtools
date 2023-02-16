@@ -5,7 +5,7 @@ function [D, errD] = getChannelDoseT1_wErrors(CoefX, PVX, dCoefX, dPVX)
 
     % Validate inputs
     validateattributes(CoefX,{'double'},{'numel',3});
-    validateattributes(dCoefX,{'double'},{'numel',3}, {'>=',0});
+    validateattributes(dCoefX,{'double'},{'numel',3, '>=',0});
     validateattributes(PVX,{'double'},{'>=',0,'<=',1});
     validateattributes(dPVX,{'double'},{'>=',0,'<=',1});
     
