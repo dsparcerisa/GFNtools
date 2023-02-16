@@ -4,8 +4,8 @@
 function [D, dD] = getDoseT1_I(I, coefs, pxmax, dI)
     % Validate inputs
     validateattributes(pxmax,'numeric',{'positive'});
-    intClasses = {'uint8','uint16','uint32','uint64'};
-    validateattributes(I,intClasses,{'3d','<=',pxmax})
+    intClasses = {'uint8','uint16','uint32','uint64','double'};
+    validateattributes(I,intClasses,{'nonnegative','3d','<=',pxmax})
     validateattributes(coefs,'double',{'size',[3 3 2]});
     if nargin>3
         validateattributes(dI,'numeric',{'nonnegative','size',size(I)});
