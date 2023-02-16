@@ -1,7 +1,7 @@
 %%% GFNTools %%%
 %%% (C) Daniel Sánchez Parcerisa 2023 %%%
 
-function [D, dD] = getChannelDoseT1(CoefR1, CoefG1, CoefB1, dCoefR1, dCoefB1, dCoefG1, R, G, B, dR, dG, dB)
+function [D, dD] = getDoseT1(CoefR1, CoefG1, CoefB1, dCoefR1, dCoefB1, dCoefG1, R, G, B, dR, dG, dB)
 
 % Inputs are validated in individual color functions
 
