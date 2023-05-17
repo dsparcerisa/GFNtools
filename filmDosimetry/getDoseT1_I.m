@@ -6,11 +6,11 @@ function [D, dD] = getDoseT1_I(I, pxmax, dI)
     global RCCalCoefs
     
     % Validate inputs
-    validateattributes(pxmax,'numeric',{'positive'});
+    validateattributes(pxmax,{'numeric'},{'positive'});
     intClasses = {'uint8','uint16','uint32','uint64','double'};
     validateattributes(I,intClasses,{'nonnegative','3d','<=',pxmax})
     if nargin>2
-        validateattributes(dI,'numeric',{'nonnegative','size',size(I)});
+        validateattributes(dI,{'numeric'},{'nonnegative','size',size(I)});
     else
         dI = 0*double(I);
     end
