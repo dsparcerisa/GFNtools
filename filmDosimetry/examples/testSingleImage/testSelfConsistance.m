@@ -91,27 +91,3 @@ residue_1 = rssq(D-dosesGy)
 xlabel('Actual dose [Gy]')
 ylabel('Reported dose [Gy]');
 legend('R','G','B','Weighted average','Location','SouthEast')
-
-%% Prueba en una sola imagen
-iDose = 5;
-dGy = dosesGy(iDose);
-I = allIMgs{iDose};
-
-loadRCCoefs
-[D_I, dD_I] = getDoseT1_I(I, maxBits);
-
-subplot(1,3,1);
-imshow(uint16(I))
-title('Scanned RC');
-
-subplot(1,3,2);
-imagesc(D_I); caxis([dGy*0.95 dGy*1.05]); colorbar;
-title('Dose [Gy]');
-subplot(1,3,3);
-imagesc(dD_I./D_I); caxis([0 0.1]); colorbar;
-title('Relative error');
-
-meanDose = mean2(D_I)
-scanError = mean2(dD_I)
-standardError = std2(D_I)
-errDose = sqrt(scanError ^2 + standardError^2)
