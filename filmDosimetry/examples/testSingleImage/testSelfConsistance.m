@@ -84,6 +84,8 @@ errorbar(dosesGy,D_1_B,dD_1_B,'b.');
 
 
 errorbar(dosesGy,D,dD,'k.'); hold on
+errorbar(dosesGy,D2,dD2,'m.'); hold on
+
 plot(dosePoints,dosePoints,'k:');
 grid on
 axis([0 round(max(dosesGy)) 0 round(max(dosesGy))]);
