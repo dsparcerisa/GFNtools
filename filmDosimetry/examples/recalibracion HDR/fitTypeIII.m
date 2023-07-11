@@ -18,7 +18,7 @@ function [fitresult, gof] = fitTypeIII(dosesGy, aa, aa_errors)
 [xData, yData] = prepareCurveData( aa, dosesGy ); %% Cambiado el orden
 
 % Set up fittype and options.
-ft = fittype( 'alpha.*x +beta.*x.^gamma', 'independent', 'x', 'dependent', 'y' );
+ft = fittype( 'a + b.*x +c.*x.^n', 'independent', 'x', 'dependent', 'y' );
 opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
 %opts.Display = 'Off';
 opts.Robust = 'LAR';
@@ -30,9 +30,9 @@ allN = 0.2:0.2:4;
 Rvalues = nan(size(allN));
 
 for i=1:numel(allN)    
-    opts.Upper = [1000 1000 allN(i)];
-    opts.Lower = [0 0 allN(i)];
-    opts.StartPoint = [1 1 allN(i)];
+    opts.Upper = [1 1000 1000 allN(i)];
+    opts.Lower = [-1 -1000 -1000 allN(i)];
+    opts.StartPoint = [0 1 1 allN(i)];
     % Fit model to data.
     [fitresult] = fit( xData, yData, ft, opts);
     opts.StartPoint = coeffvalues(fitresult);
@@ -46,7 +46,7 @@ end
 
 % figure(10)
 % plot(allN,Rvalues,'o');
-% [bestN, bestI] = max(Rvalues);
+[bestN, bestI] = max(Rvalues);
 % n = allN(bestI)
 % % 
 fitresult = allfits{bestI};

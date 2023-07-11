@@ -59,23 +59,23 @@ dNOD_G = (1/log(10)) * sqrt( (dG_noHDR./G_noHDR).^2 + (dG_noHDR(index0Gy)/G_noHD
 dNOD_B = (1/log(10)) * sqrt( (dB_noHDR./B_noHDR).^2 + (dB_noHDR(index0Gy)/B_noHDR(index0Gy))^2 );
 
 %% Fit type III
-[fR3_noHDR, gofR3] = fitTypeIII(dosesGy, NOD_R, dNOD_R)
-[fG3_noHDR, gofG3] = fitTypeIII(dosesGy, NOD_G, dNOD_G)
-[fB3_noHDR, gofB3] = fitTypeIII(dosesGy, max(0,NOD_B), dNOD_B)
+[fR3_noHDR, gofR3] = fitTypeIII(dosesGy, NOD_R, dNOD_R);
+[fG3_noHDR, gofG3] = fitTypeIII(dosesGy, NOD_G, dNOD_G);
+[fB3_noHDR, gofB3] = fitTypeIII(dosesGy, max(0,NOD_B), dNOD_B);
 
-CoefR3_noHDR = [fR3_noHDR.alpha fR3_noHDR.beta fR3_noHDR.gamma]
-CoefG3_noHDR = [fG3_noHDR.alpha fG3_noHDR.beta fG3_noHDR.gamma]
-CoefB3_noHDR = [fB3_noHDR.alpha fB3_noHDR.beta fB3_noHDR.gamma]
+CoefR3_noHDR = [fR3_noHDR.a fR3_noHDR.b fR3_noHDR.c fR3_noHDR.n];
+CoefG3_noHDR = [fG3_noHDR.a fG3_noHDR.b fG3_noHDR.c fG3_noHDR.n];
+CoefB3_noHDR = [fB3_noHDR.a fB3_noHDR.b fB3_noHDR.c fB3_noHDR.n];
 
 DR3 = confint(fR3_noHDR,0.683);
 dCoefR3_noHDR = 0.5*(DR3(2,:) - DR3(1,:));
-dCoefR3_noHDR(3) = 0;
+dCoefR3_noHDR(4) = 0;
 DG3 = confint(fG3_noHDR,0.683);
 dCoefG3_noHDR = 0.5*(DG3(2,:) - DG3(1,:));
-dCoefG3_noHDR(3) = 0;
+dCoefG3_noHDR(4) = 0;
 DB3 = confint(fB3_noHDR,0.683);
 dCoefB3_noHDR = 0.5*(DB3(2,:) - DB3(1,:));
-dCoefB3_noHDR(3) = 0;
+dCoefB3_noHDR(4) = 0;
 
 dosePoints = 0:0.1:(round(max(dosesGy)));
 
@@ -148,23 +148,23 @@ dNOD_G_siHDR = (1/log(10)) * sqrt( (dG_siHDR./G_siHDR).^2 + (dG_siHDR(index0Gy)/
 dNOD_B_siHDR = (1/log(10)) * sqrt( (dB_siHDR./B_siHDR).^2 + (dB_siHDR(index0Gy)/B_siHDR(index0Gy))^2 );
 
 %% Fit type III
-[fR3_siHDR, gofR3] = fitTypeIII(dosesGy, NOD_R_siHDR, dNOD_R_siHDR)
-[fG3_siHDR, gofG3] = fitTypeIII(dosesGy, NOD_G_siHDR, dNOD_G_siHDR)
-[fB3_siHDR, gofB3] = fitTypeIII(dosesGy, max(0,NOD_B_siHDR), dNOD_B_siHDR)
+[fR3_siHDR, gofR3] = fitTypeIII(dosesGy, NOD_R_siHDR, dNOD_R_siHDR);
+[fG3_siHDR, gofG3] = fitTypeIII(dosesGy, NOD_G_siHDR, dNOD_G_siHDR);
+[fB3_siHDR, gofB3] = fitTypeIII(dosesGy, max(0,NOD_B_siHDR), dNOD_B_siHDR);
 
-CoefR3_siHDR = [fR3_siHDR.alpha fR3_siHDR.beta fR3_siHDR.gamma];
-CoefG3_siHDR = [fG3_siHDR.alpha fG3_siHDR.beta fG3_siHDR.gamma];
-CoefB3_siHDR = [fB3_siHDR.alpha fB3_siHDR.beta fB3_siHDR.gamma];
+CoefR3_siHDR = [fR3_siHDR.a fR3_siHDR.b fR3_siHDR.c fR3_siHDR.n];
+CoefG3_siHDR = [fG3_siHDR.a fG3_siHDR.b fG3_siHDR.c fG3_siHDR.n];
+CoefB3_siHDR = [fB3_siHDR.a fB3_siHDR.b fB3_siHDR.c fB3_siHDR.n];
 
 DR3 = confint(fR3_siHDR,0.683);
 dCoefR3_siHDR = 0.5*(DR3(2,:) - DR3(1,:));
-dCoefR3_siHDR(3) = 0;
+dCoefR3_siHDR(4) = 0;
 DG3 = confint(fG3_siHDR,0.683);
 dCoefG3_siHDR = 0.5*(DG3(2,:) - DG3(1,:));
-dCoefG3_siHDR(3) = 0;
+dCoefG3_siHDR(4) = 0;
 DB3 = confint(fB3_siHDR,0.683);
 dCoefB3_siHDR = 0.5*(DB3(2,:) - DB3(1,:));
-dCoefB3_siHDR(3) = 0;
+dCoefB3_siHDR(4) = 0;
 
 
 %% Make plot
