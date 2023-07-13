@@ -22,7 +22,7 @@ RCCalCoefs(2,:,2) = dCoefG1_siHDR;
 RCCalCoefs(3,:,2) = dCoefB1_siHDR;
 
 global RCCalCoefs3
-RCCalCoefs3 = zeros(3,3,2);
+RCCalCoefs3 = zeros(3,4,2);
 RCCalCoefs3(1,:,1) = CoefR3_siHDR;
 RCCalCoefs3(2,:,1) = CoefG3_siHDR;
 RCCalCoefs3(3,:,1) = CoefB3_siHDR;
