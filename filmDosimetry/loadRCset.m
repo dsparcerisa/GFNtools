@@ -1,6 +1,8 @@
-function [names,IMgs,stdIMgs] = loadRCset(RCpath)
+function [names,IMgs,stdIMgs] = loadRCset(RCpath, NumEscaneos, Nimgs)
 
-NumEscaneos = 3;
+if nargin<2
+    NumEscaneos = 3;
+end
 
 [Fpath, Fname, Fext] = fileparts(RCpath);
 RCpath2 = fullfile(Fpath, [Fname ' (2)' Fext]);
@@ -10,8 +12,12 @@ imgInfo = imfinfo(RCpath);
 bitsPerSample = imgInfo.BitsPerSample(1);
 
 I{1} = imread(RCpath);
+if NumEscaneos>1
 I{2} = imread(RCpath2);
+end
+if NumEscaneos>2
 I{3} = imread(RCpath3);
+end
 
 Ifinal = repmat(I{1},[1 1 1 NumEscaneos]);
 Ifinal = double(Ifinal);
@@ -22,8 +28,10 @@ end
 Ifinal_mean = mean(Ifinal,4);
 Ifinal_std = std(Ifinal,[],4);
 
-imshow(I{1})
-Nimgs = input('How many images in this file? ')
+if nargin<3
+    imshow(I{1})
+    Nimgs = input('How many images in this file? ')
+end
 
 croppings = {};
 names = {};
