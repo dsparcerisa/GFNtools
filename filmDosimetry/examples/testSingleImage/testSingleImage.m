@@ -18,8 +18,11 @@ close(98);
 %%
 [pixCM, maxBits] = getImgMetaInfo(imPath);
 
-loadRCCoefs
+calName_rational = 'EBT3_octubre2023_GM-rational';
+calName_netOD = 'EBT3_octubre2023_GM-netOD';
+loadRCCalibration(calName_rational)
 [D_I, dD_I] = getDoseT1_I(I, maxBits);
+loadRCCalibration(calName_netOD)
 [D_I3, dD_I3] = getDoseT3_I(I, I0, maxBits);
 
 %% Combined plot

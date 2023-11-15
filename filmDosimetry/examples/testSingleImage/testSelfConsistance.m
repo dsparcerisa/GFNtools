@@ -54,17 +54,19 @@ dB = errRGBvalues(:,3);
 dosePoints = 0:0.1:(round(max(dosesGy)));
 
 %% Cargar coeficientes basicos
-loadRCCoefs
+calName = 'EBT3_julio2020_FQS_rescanMayo2022-rational';
+global RCCalibration
+loadRCCalibration(calName)
 
 %% Hacer la batería de pruebas
 
 % FIT 1
-CoefR1 =  RCCalCoefs(1,:,1);
-CoefG1 =  RCCalCoefs(2,:,1);
-CoefB1 =  RCCalCoefs(3,:,1);
-dCoefR1 =  RCCalCoefs(1,:,2);
-dCoefG1 =  RCCalCoefs(2,:,2);
-dCoefB1 =  RCCalCoefs(3,:,2);
+CoefR1 =  RCCalibration.CoefR;
+CoefG1 =  RCCalibration.CoefG;
+CoefB1 =  RCCalibration.CoefB;
+dCoefR1 =  RCCalibration.dCoefR;
+dCoefG1 =  RCCalibration.dCoefG;
+dCoefB1 =  RCCalibration.dCoefB;
 
 % En rojo
 [D_1_R, dD_1_R] = getChannelDoseT1_wErrors(CoefR1, R, dCoefR1, dR)
@@ -80,11 +82,8 @@ errorbar(dosesGy,D_1_G,dD_1_G,'g.');
 errorbar(dosesGy,D_1_B,dD_1_B,'b.');
 
 [D, dD] = getDoseT1(CoefR1, CoefG1, CoefB1, dCoefR1, dCoefB1, dCoefG1, R, G, B, dR, dG, dB)
-[D2, dD2, varMat] = getDoseT1_Micke(CoefR1, CoefG1, CoefB1, dCoefR1, dCoefB1, dCoefG1, R, G, B, dR, dG, dB, -0.01:0.001:0.01)
-
 
 errorbar(dosesGy,D,dD,'k.'); hold on
-errorbar(dosesGy,D2,dD2,'m.'); hold on
 
 plot(dosePoints,dosePoints,'k:');
 grid on
