@@ -3,7 +3,7 @@
 
 function [D, dD] = getDoseT3_I(I, I0, pxmax, dI, dI0)
 
-    global RCCalCoefs3
+    global RCCalibration
     
     % Validate inputs
     validateattributes(pxmax,{'numeric'},{'positive'});
@@ -20,12 +20,12 @@ function [D, dD] = getDoseT3_I(I, I0, pxmax, dI, dI0)
     end
    
     % Define values
-    CoefR3 =  RCCalCoefs3(1,:,1);
-    CoefG3 =  RCCalCoefs3(2,:,1);
-    CoefB3 =  RCCalCoefs3(3,:,1);
-    dCoefR3 =  RCCalCoefs3(1,:,2);
-    dCoefG3 =  RCCalCoefs3(2,:,2);
-    dCoefB3 =  RCCalCoefs3(3,:,2);
+    CoefR3 =  RCCalibration.CoefR;
+    CoefG3 =  RCCalibration.CoefG;
+    CoefB3 =  RCCalibration.CoefB;
+    dCoefR3 =  RCCalibration.dCoefR;
+    dCoefG3 =  RCCalibration.dCoefG;
+    dCoefB3 =  RCCalibration.dCoefB;
     
     R = double(I(:,:,1)) / pxmax;
     G = double(I(:,:,2)) / pxmax;
